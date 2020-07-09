@@ -18,10 +18,9 @@ using System.Windows.Shapes;
 
 namespace DataBaseLab.SaleView
 {
-    /// <summary>
-    /// Interaction logic for Buy.xaml
-    /// </summary>
-    /// 
+    //здесь положение элемента positionBlank распределяется следующим образом
+    //0 - склад
+    //1 - корзина
 
 
     public partial class Sale_Blank : Page
@@ -33,48 +32,7 @@ namespace DataBaseLab.SaleView
         private int SectionId;
         private int ManagerId;
 
-        //Начало колхоза им. Ленина
-        private void AddCart(int CurId, int CurAmount)
-        {
-            int a = Court.Length;
-            Array.Resize(ref Court, Court.Length + 1);
-            Court[a] = new PositionBlank(CurId, Storage[CurId].GetNames(), CurAmount, Storage[CurId].GetProductId(), Storage[CurId].GetAmount(), this, 0);
 
-            CourtViewer.Children.Add(Court[a]);
-
-            Storage[CurId].ChangeAmount(Storage[CurId].GetAmount() - CurAmount);
-        }
-
-        private static ChangeInfo buff;
-
-        public ChangeInfo Buff
-        {
-            set
-            {
-                buff = value;
-                AddCart(buff.Id, buff.Amount);
-            }
-            get { return buff; }
-        }
-
-        private PositionBlank ChangingCourt;
-        public int ChangeCourtAmount
-        {
-            set
-            {
-                int buff = value;
-                int id = ChangingCourt.GetId();
-                if (buff >= ChangingCourt.GetAmount())
-                {
-                    DeleteCourtElement();
-                    return;
-                }
-                ChangingCourt.ChangeAmount(ChangingCourt.GetAmount() - buff);
-                buff += Storage[id].GetAmount();
-                Storage[id].ChangeAmount(buff);
-            }
-        }
-        //Конец колхоза им. Ленина
 
         public List<Buy> CourtData;
 
@@ -97,9 +55,35 @@ namespace DataBaseLab.SaleView
             Storage = new PositionBlank[ReadInfo.Length];
             for (i = 0; i < ReadInfo.Length; i++)
             {
-                Storage[i] = new PositionBlank(i, ReadInfo[i].Name, ReadInfo[i].Amount, ReadInfo[i].Id, ReadInfo[i].Price, this, 1);
+                Storage[i] = new PositionBlank(i, ReadInfo[i].Name, ReadInfo[i].Amount, ReadInfo[i].Id, ReadInfo[i].Price, 0);
+                Storage[i].MouseDown += PositionBlank_Click;
                 StorageViewer.Children.Add(Storage[i]);
             }
+        }
+
+        private void PositionBlank_Click(object sender, MouseButtonEventArgs e)
+        {
+            if(sender is PositionBlank)
+            {
+                SelectedBuff = sender as PositionBlank;
+
+
+            }
+        }
+
+        private void AddCart()
+        {
+            int CurId = SelectedBuff.GetId();
+            int CurAmount = 0;
+            int a = Court.Length;
+            Array.Resize(ref Court, Court.Length + 1);
+
+            Court[a] = new PositionBlank(CurId, Storage[CurId].GetNames(), CurAmount, Storage[CurId].GetProductId(), Storage[CurId].GetAmount(), 1);
+            Court[a].MouseDown += PositionBlank_Click;
+
+            Storage[CurId].ChangeAmount(Storage[CurId].GetAmount() - CurAmount);
+
+            CourtViewer.Children.Add(Court[a]); 
         }
 
         private void BuyBtm_MouseDown(object sender, MouseButtonEventArgs e)
@@ -176,9 +160,7 @@ namespace DataBaseLab.SaleView
         {
             if (SelectedBuff != null)
             {
-                ChangingCourt = SelectedBuff;
-                TaskWindow TW = new TaskWindow(0, ChangingCourt.GetAmount(), this, 1);
-                TW.Show();
+
             }
         }
 
@@ -190,5 +172,32 @@ namespace DataBaseLab.SaleView
             }
             
         }
+
+
+
+
+        //Начало колхоза им. Ленина
+
+
+        private static ChangeInfo buff;
+
+        private PositionBlank ChangingCourt;
+        public int ChangeCourtAmount
+        {
+            set
+            {
+                int buff = value;
+                int id = ChangingCourt.GetId();
+                if (buff >= ChangingCourt.GetAmount())
+                {
+                    DeleteCourtElement();
+                    return;
+                }
+                ChangingCourt.ChangeAmount(ChangingCourt.GetAmount() - buff);
+                buff += Storage[id].GetAmount();
+                Storage[id].ChangeAmount(buff);
+            }
+        }
+        //Конец колхоза им. Ленина
     }
 }

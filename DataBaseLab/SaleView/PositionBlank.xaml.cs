@@ -20,23 +20,22 @@ namespace DataBaseLab.SaleView
     /// </summary>
     public partial class PositionBlank : UserControl
     {
+        private SolidColorBrush[] brushes = { Brushes.Red, Brushes.LightGray };
         private int Id { get; set; }
         private string Names { get; set; }//имя продукта
         private int ProductId { get; set; }//id продукта
         private int Amount { get; set; }//
         private double Price { get; set; }
-        private int IsLeft { get; set; }
-        private Sale_Blank LocParent { get; set; }
+        private int Position { get; set; }
 
-        public PositionBlank(int inId, string inNames, int inAmount, int inProductId, double inPrice, Sale_Blank inParent, int inIsLeft)
+        public PositionBlank(int inId, string inNames, int inAmount, int inProductId, double inPrice, int inPosition)
         {
             Id = inId;
             Names = inNames;
             Amount = inAmount;
             ProductId = inProductId;
-            LocParent = inParent;
             Price = inPrice;
-            IsLeft = inIsLeft;
+            Position = inPosition;
 
             InitializeComponent();
             AmountBlank.Text = Convert.ToString(Amount);
@@ -63,11 +62,15 @@ namespace DataBaseLab.SaleView
         {
             return Price;
         }
-
+        public int GetPosition()
+        {
+            return Position;
+        }
         public void ChangeBackground(SolidColorBrush brush)
         {
             this.Background = brush;
         }
+        
 
         public void ChangeAmount(int newAmount)
         {
@@ -77,24 +80,10 @@ namespace DataBaseLab.SaleView
 
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (IsLeft == 1)
-            {
-                TaskWindow task = new TaskWindow(Id, Amount, LocParent, 0);
-                task.Show();
-            }
+            if (Background == brushes[0])
+                Background = brushes[1];
             else
-            {
-                if(LocParent.SelectedBuff == this)
-                {
-                    LocParent.SelectedBuff.ChangeBackground(Brushes.LightGray);
-                    LocParent.SelectedBuff = null;
-                    return;
-                }
-                if (LocParent.SelectedBuff != null)
-                    LocParent.SelectedBuff.ChangeBackground(Brushes.LightGray);
-                //this.Background = Brushes.PaleVioletRed;
-                LocParent.SelectedBuff = this;
-            }
+                Background = brushes[0];
         }
     }
 }

@@ -34,8 +34,6 @@ namespace Blank
         private void ReadUserTable()
         {
             int i;
-            int j;
-            int PosTrigger, UnitTrigger;
             int posleng;
             int unitleng;
             string[] PositionList = new string[0];

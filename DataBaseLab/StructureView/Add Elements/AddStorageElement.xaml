@@ -22,7 +22,7 @@
         <Rectangle Grid.Column="3" Fill="DarkGray"/>
         <Rectangle Grid.Column="5" Fill="DarkGray"/>
         <TextBlock x:Name="IdText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Id" Foreground="DarkGray"/>
-        <TextBox x:Name="ProductNameText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Product name" Background="DarkGray" Grid.Column="1" TextChanged="ProductNameText_TextChanged"/>
+        <TextBox x:Name="ProductNameText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Product name" Background="DarkGray" Grid.Column="1"/>
         <TextBox x:Name="AmountText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" Grid.Column="2" Background="LightGray" TextChanged="AmountText_TextChanged" PreviewTextInput="AmountText_PreviewTextInput"/>
         <TextBox x:Name="MinAmountText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" Grid.Column="3" Background="DarkGray" TextChanged="MinAmountText_TextChanged" PreviewTextInput="MinAmountText_PreviewTextInput"/>
         <TextBox x:Name="SectionIdText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" Grid.Column="4" Background="LightGray" TextChanged="SectionIdText_TextChanged" PreviewTextInput="SectionIdText_PreviewTextInput"/>

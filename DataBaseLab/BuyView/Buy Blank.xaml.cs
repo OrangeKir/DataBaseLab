@@ -92,7 +92,7 @@ namespace DataBaseLab
 
         private void ReadStorage()
         {
-            int i, j;
+            int i;
             StructWorkClass SWC = new StructWorkClass();
             ProductInfo[] ReadInfo;
             ReadInfo = SWC.ReadBasicStorage(SectionId);

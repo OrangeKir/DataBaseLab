@@ -21,19 +21,9 @@ namespace DataBaseLab.StructureView.Add_Elements
     /// </summary>
     public partial class AddManagerElement : UserControl
     {
-        Structure_Blank parent;
-        public AddManagerElement(Structure_Blank inParent)
+        public AddManagerElement()
         {
-            parent = inParent;
             InitializeComponent();
-        }
-
-        private void ManagerNameText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (ManagerNameText != null)
-            {
-                parent.addName = ManagerNameText.Text;
-            }
         }
     }
 }

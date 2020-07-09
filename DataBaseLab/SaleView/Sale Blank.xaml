@@ -11,18 +11,20 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
             <RowDefinition/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="5" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -46,12 +48,13 @@
             <TextBlock x:Name="ChangeText" Text="Изменить" Grid.Row="3" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="ChangeBtm_MouseDown"/>
 
         </Grid>
-        <ScrollViewer Grid.Column="1" Grid.Row="1">
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Margin="0,0,0.333,0">
             <StackPanel x:Name="StorageViewer"/>
         </ScrollViewer>
-        
-        <ScrollViewer Grid.Column="3" Grid.Row="1">
+
+        <ScrollViewer Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Margin="49.667,0,0,0">
             <StackPanel x:Name="CourtViewer"/>
         </ScrollViewer>
+        <Grid Grid.ColumnSpan="4" Grid.Row="3" Width="575"/>
     </Grid>
 </Page>

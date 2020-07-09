@@ -21,70 +21,39 @@ namespace DataBaseLab.StructureView.Add_Elements
     /// </summary>
     public partial class AddStorageElement : UserControl
     {
-        Structure_Blank parent;
-        public AddStorageElement(Structure_Blank inParent)
+        public AddStorageElement()
         {
-            parent = inParent;
             InitializeComponent();
 
         }
-
-        private void ProductNameText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (AmountText != null)
-            {
-                if (AmountText.Text != "")
-                    parent.addName = ProductNameText.Text;
-            }
-        }
         private void AmountText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (AmountText != null)
-            {
-                if (AmountText.Text == "")
-                    AmountText.Text = "0";
-                parent.addAmount = Convert.ToInt32(AmountText.Text);
-            }
+            if (AmountText.Text == "")
+                AmountText.Text = "0";
         }
 
         private void MinAmountText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (MinAmountText != null)
-            {
-                if (MinAmountText.Text == "")
-                    MinAmountText.Text = "0";
-                parent.addMinAmount = Convert.ToInt32(MinAmountText.Text);
-            }
+            if (MinAmountText.Text == "")
+                MinAmountText.Text = "0";
         }
 
         private void SectionIdText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (SectionIdText != null)
-            {
-                if (SectionIdText.Text == "")
-                    SectionIdText.Text = "0";
-                parent.addSectionId = Convert.ToInt32(SectionIdText.Text);
-            }
+            if (SectionIdText.Text == "")
+                SectionIdText.Text = "0";
         }
 
         private void AgentIdText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (AgentIdText != null)
-            {
-                if (AgentIdText.Text == "")
-                    AgentIdText.Text = "0";
-                parent.addAgentId = Convert.ToInt32(AgentIdText.Text);
-            }
+            if (AgentIdText.Text == "")
+                AgentIdText.Text = "0";
         }
 
         private void PriceText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (PriceText != null)
-            {
-                if (PriceText.Text == "")
-                    PriceText.Text = "0";
-                parent.addPrice = Convert.ToDouble(PriceText.Text);
-            }
+            if (PriceText.Text == "")
+                PriceText.Text = "0";
         }
 
 

@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <Rectangle Grid.Row="0" Fill="DarkGray"/>
         <TextBlock x:Name="IdText" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Id" Foreground="Gray" Margin="30,17,29,17"/>
-        <TextBox x:Name="NameText" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Conteragent Name" Background="LightGray" TextChanged="NameText_TextChanged"/>
+        <TextBox x:Name="NameText" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Conteragent Name" Background="LightGray"/>
 
 
     </Grid>

@@ -21,19 +21,9 @@ namespace DataBaseLab.StructureView.Add_Elements
     /// </summary>
     public partial class AddAgentElement : UserControl
     {
-        Structure_Blank parent;
-        public AddAgentElement(Structure_Blank inParent)
+        public AddAgentElement()
         {
-            parent = inParent;
             InitializeComponent();
-        }
-
-        private void NameText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (NameText != null)
-            {
-                parent.addName = NameText.Text;
-            }
         }
 
     }

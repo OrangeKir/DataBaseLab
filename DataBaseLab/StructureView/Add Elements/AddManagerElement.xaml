@@ -17,7 +17,7 @@
         <Rectangle Grid.Column="1" Fill="DarkGray"/>
 
         <TextBlock x:Name="IdText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Id" Foreground="Gray"/>
-        <TextBox x:Name="ManagerNameText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Manager name" Grid.Column="1" Background="DarkGray" TextChanged="ManagerNameText_TextChanged"/>
+        <TextBox x:Name="ManagerNameText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Manager name" Grid.Column="1" Background="DarkGray"/>
         <TextBlock x:Name="CurentProfitText" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" Grid.Column="2" Foreground="Gray"/>
     </Grid>
 </UserControl>

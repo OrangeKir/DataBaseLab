@@ -141,7 +141,7 @@ namespace DataBaseLab.StructureView
             addAgentId = 0;
             addPrice = 0;
 
-            writeStorage = new AddStorageElement(this);
+            writeStorage = new AddStorageElement();
             AddFrame.Content = writeStorage;
 
             for (i = 0; i < readStorages.Length; i++)
@@ -182,7 +182,7 @@ namespace DataBaseLab.StructureView
             HeaderFrame.Content = Header;
 
             addName = "Agent Name";
-            writeConterAgent = new AddAgentElement(this);
+            writeConterAgent = new AddAgentElement();
             AddFrame.Content = writeConterAgent;
 
             for (i = 0; i < readAgent.Length; i++)
@@ -217,7 +217,7 @@ namespace DataBaseLab.StructureView
             HeaderFrame.Content = Header;
 
             addName = "Manager Name";
-            writeManager = new AddManagerElement(this);
+            writeManager = new AddManagerElement();
             AddFrame.Content = writeManager;
 
             for (i = 0; i < readManager.Length; i++)
@@ -376,34 +376,44 @@ namespace DataBaseLab.StructureView
             {
                 dataStorage = new OKDT.Storage()
                 {
-                    Name = addName,
-                    Amount = addAmount,
-                    MinAmount = addMinAmount,
-                    SectionId = addSectionId,
-                    AgentId = addAgentId,
-                    Price = addPrice
+                    Name = writeStorage.ProductNameText.Text,
+                    Amount = Convert.ToInt32(writeStorage.AmountText.Text),
+                    MinAmount = Convert.ToInt32(writeStorage.MinAmountText.Text),
+                    SectionId = Convert.ToInt32(writeStorage.SectionIdText.Text),
+                    AgentId = Convert.ToInt32(writeStorage.AgentIdText.Text),
+                    Price = Convert.ToDouble(writeStorage.PriceText.Text)
                 };
-                SWC.WriteStorage(dataStorage);
-                RefreshStorage();
+                if (writeStorage.ProductNameText.Text != "")
+                {
+                    SWC.WriteStorage(dataStorage);
+                    RefreshStorage();
+                }
             }
             else if (addStatus == 2)
             {
                 dataManager = new OKDT.Manager()
                 {
-                    Name = addName,
-                    CurentProfit = 0,
+                    Name = writeManager.ManagerNameText.Text,
+                    CurentProfit = 0
                 };
-                SWC.WriteManager(dataManager);
-                RefreshManager();
+
+                if (writeManager.ManagerNameText.Text != "")
+                {
+                    SWC.WriteManager(dataManager);
+                    RefreshManager();
+                }
             }
             else if (addStatus == 3)
             {
                 dataAgent = new OKDT.ConterAgent()
                 {
-                    Name = addName
+                    Name = writeConterAgent.NameText.Text
                 };
-                SWC.WriteAgent(dataAgent);
-                RefreshAgent();
+                if (writeConterAgent.NameText.Text != "")
+                {
+                    SWC.WriteAgent(dataAgent);
+                    RefreshAgent();
+                }
             }
         }
 
@@ -411,17 +421,17 @@ namespace DataBaseLab.StructureView
         {
             if (addStatus == 1)
             {
-                writeStorage = new AddStorageElement(this);
+                writeStorage = new AddStorageElement();
                 AddFrame.Content = writeStorage;
             }
             else if (addStatus == 2)
             {
-                writeManager = new AddManagerElement(this);
+                writeManager = new AddManagerElement();
                 AddFrame.Content = writeManager;
             }
             else if (addStatus == 3)
             {
-                writeConterAgent = new AddAgentElement(this);
+                writeConterAgent = new AddAgentElement();
                 AddFrame.Content = writeConterAgent;
             }
         }

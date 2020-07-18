@@ -55,13 +55,11 @@ namespace DataBaseLab.StructureView
             OKDT.Storage StorageBuff;
 
             SaleStruct Header = new SaleStruct("Id", "Имя продукта", "Объем", "Id сотрудника", "Id отдела", "Сумма", "Дата");
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
-            OKDT.SaleClass SC = new OKDT.SaleClass();
 
             AddRow.Height = new GridLength(0);
             StructureViewStack.Children.Clear();
-            readSales = SC.ReadSales();
-            readStorage = SWC.ReadFullStorage();
+            readSales = OKDT.SaleClass.ReadSales();
+            readStorage = OKDT.StructWorkClass.ReadFullStorage();
             saleChilds = new SaleStruct[readSales.Length];
             HeaderFrame.Content = Header;
             for (i = 0; i < saleChilds.Length; i++)
@@ -90,13 +88,11 @@ namespace DataBaseLab.StructureView
             BuyStruct[] buyChilds;
 
             BuyStruct Header = new BuyStruct("Id", "Имя продукта", "Объем", "Id поставщика", "Дата");
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
-            OKDT.BuyClass BC = new OKDT.BuyClass();
 
             AddRow.Height = new GridLength(0);
             StructureViewStack.Children.Clear();
-            readBuys = BC.ReadBuys();
-            readStorage = SWC.ReadFullStorage();
+            readBuys = OKDT.BuyClass.ReadBuys();
+            readStorage = OKDT.StructWorkClass.ReadFullStorage();
             buyChilds = new BuyStruct[readBuys.Length];
             HeaderFrame.Content = Header;
 
@@ -125,10 +121,9 @@ namespace DataBaseLab.StructureView
             StorageStruct[] storageChilds;
 
             StorageStruct Header = new StorageStruct("Id", "Имя продукта", "Объем", "Минимальный объем", "Id отдела", "Id поставщика", "Стоимость");
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
 
             StructureViewStack.Children.Clear();
-            readStorages = SWC.ReadFullStorage();
+            readStorages = OKDT.StructWorkClass.ReadFullStorage();
             storageChilds = new StorageStruct[readStorages.Length];
             AddRow.Height = new GridLength(50);
             addStatus = 1;
@@ -172,9 +167,8 @@ namespace DataBaseLab.StructureView
             AgentStruct[] agentChilds;
 
             AgentStruct Header = new AgentStruct("Id", "Имя поставщика");
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
 
-            readAgent = SWC.ReadAgent();
+            readAgent = OKDT.StructWorkClass.ReadAgent();
             StructureViewStack.Children.Clear();
             agentChilds = new AgentStruct[readAgent.Length];
             AddRow.Height = new GridLength(50);
@@ -207,9 +201,8 @@ namespace DataBaseLab.StructureView
             ManagerStruct[] managerChilds;
 
             ManagerStruct Header = new ManagerStruct("Id", "ФИО", "Текущая прибыль");
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
             
-            readManager = SWC.ReadManager();
+            readManager = OKDT.StructWorkClass.ReadManager();
             StructureViewStack.Children.Clear();
             managerChilds = new ManagerStruct[readManager.Length];
             AddRow.Height = new GridLength(50);
@@ -239,10 +232,9 @@ namespace DataBaseLab.StructureView
             OKDT.Manager[] readManager;
 
             ProfitArchiveStruct Header = new ProfitArchiveStruct("Id", "Дата", "Имя сотрудника", "Прибыль");
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
 
-            readProfitArchive = SWC.ReadProfitArchive();
-            readManager = SWC.ReadManager();
+            readProfitArchive = OKDT.StructWorkClass.ReadProfitArchive();
+            readManager = OKDT.StructWorkClass.ReadManager();
             StructureViewStack.Children.Clear();
             profitArchiveChilds = new ProfitArchiveStruct[readProfitArchive.Length];
             AddRow.Height = new GridLength(0);
@@ -269,9 +261,8 @@ namespace DataBaseLab.StructureView
             DailyProfitStruct[] dailyProfitChilds;
 
             DailyProfitStruct Header = new DailyProfitStruct("Дата", "Прибыль", "День недели");
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
 
-            readDailyProfit = SWC.ReadDailyProfit();
+            readDailyProfit = OKDT.StructWorkClass.ReadDailyProfit();
             StructureViewStack.Children.Clear();
             dailyProfitChilds = new DailyProfitStruct[readDailyProfit.Length];
             AddRow.Height = new GridLength(0);
@@ -319,9 +310,8 @@ namespace DataBaseLab.StructureView
             DailySectionProfitStruct[] dailySectionProfitChilds;
 
             DailySectionProfitStruct Header = new DailySectionProfitStruct("Дата", "Id отдела", "Прибыль");
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
 
-            readDailySectionProfit = SWC.ReadDailySectionProfit();
+            readDailySectionProfit = OKDT.StructWorkClass.ReadDailySectionProfit();
             StructureViewStack.Children.Clear();
             dailySectionProfitChilds = new DailySectionProfitStruct[readDailySectionProfit.Length];
             AddRow.Height = new GridLength(0);
@@ -348,9 +338,8 @@ namespace DataBaseLab.StructureView
             MountlyProfitStruct Header = new MountlyProfitStruct("Дата", midWeekProfit, "Сумма");
             List<MountlyStruct> readMountlyProfit;
 
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
             StructureViewStack.Children.Clear();
-            readMountlyProfit = SWC.CompositeMountlyProfit();
+            readMountlyProfit = OKDT.StructWorkClass.CompositeMountlyProfit();
             mountlyProfitChild = new MountlyProfitStruct[readMountlyProfit.Count];
             HeaderFrame.Content = Header;
 
@@ -368,7 +357,6 @@ namespace DataBaseLab.StructureView
 
         private void AcceptBtm_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            OKDT.StructWorkClass SWC = new OKDT.StructWorkClass();
             OKDT.Storage dataStorage;
             OKDT.Manager dataManager;
             OKDT.ConterAgent dataAgent;
@@ -385,7 +373,7 @@ namespace DataBaseLab.StructureView
                 };
                 if (writeStorage.ProductNameText.Text != "")
                 {
-                    SWC.WriteStorage(dataStorage);
+                    OKDT.StructWorkClass.WriteStorage(dataStorage);
                     RefreshStorage();
                 }
             }
@@ -399,7 +387,7 @@ namespace DataBaseLab.StructureView
 
                 if (writeManager.ManagerNameText.Text != "")
                 {
-                    SWC.WriteManager(dataManager);
+                    OKDT.StructWorkClass.WriteManager(dataManager);
                     RefreshManager();
                 }
             }
@@ -411,7 +399,7 @@ namespace DataBaseLab.StructureView
                 };
                 if (writeConterAgent.NameText.Text != "")
                 {
-                    SWC.WriteAgent(dataAgent);
+                    OKDT.StructWorkClass.WriteAgent(dataAgent);
                     RefreshAgent();
                 }
             }

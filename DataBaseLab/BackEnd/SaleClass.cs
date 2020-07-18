@@ -8,26 +8,26 @@ using System.Data.Entity;
 
 namespace OKDT
 {
-    class SaleClass
+    static class SaleClass
     {
-public Sale[] ReadSales()
-{
-    Sale[] ReadProfit = new Sale[0];
-    using (var dbContext = new MyDbContext())
-    {
-        try
+        public static Sale[] ReadSales()
         {
-            ReadProfit = dbContext.Sales.ToArray();
-        }
-        catch
-        {
+            Sale[] ReadProfit = new Sale[0];
+            using (var dbContext = new MyDbContext())
+            {
+                try
+                {
+                    ReadProfit = dbContext.Sales.ToArray();
+                }
+                catch
+                {
+                    return ReadProfit;
+                }
+            }
             return ReadProfit;
         }
-    }
-    return ReadProfit;
-}
 
-        public int SaleWork(ChangeInfo[] SaleArray, int CurManagerId, int CurSectionId)
+        public static int SaleWork(ChangeInfo[] SaleArray, int CurManagerId, int CurSectionId)
         {
             List<Storage> StorageInfo;
             List<Manager> managers;

@@ -93,9 +93,8 @@ namespace DataBaseLab
         private void ReadStorage()
         {
             int i;
-            StructWorkClass SWC = new StructWorkClass();
             ProductInfo[] ReadInfo;
-            ReadInfo = SWC.ReadBasicStorage(SectionId);
+            ReadInfo = StructWorkClass.ReadBasicStorage(SectionId);
             StorageViewer.Children.Clear();
             Storage = new PositionBlankBuy[ReadInfo.Length];
             for (i = 0; i < ReadInfo.Length; i++)
@@ -107,9 +106,8 @@ namespace DataBaseLab
         private void ReadFireStorage()
         {
             int i, j;
-            StructWorkClass SWC = new StructWorkClass();
             ProductInfo[] ReadInfo;
-            ReadInfo = SWC.ReadBasicStorage(SectionId);
+            ReadInfo = StructWorkClass.ReadBasicStorage(SectionId);
             StorageViewer.Children.Clear();
             Storage = new PositionBlankBuy[0];
             j = 0;
@@ -135,8 +133,7 @@ namespace DataBaseLab
                 changeInfo[i].Id = Court[i].GetProductId();
                 changeInfo[i].Amount = Court[i].GetAmount();
             }
-            BuyClass BC = new BuyClass();
-            BC.BuyWork(changeInfo);
+            BuyClass.BuyWork(changeInfo);
 
             CourtViewer.Children.Clear();
             Court = new PositionBlankBuy[0];

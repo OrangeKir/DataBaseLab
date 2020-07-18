@@ -14,11 +14,11 @@ namespace OKDT
         public double MounthProfit;
     }
 
-    class StructWorkClass
+    static class StructWorkClass
     {
         //работа со складом
 
-        public ProductInfo[] ReadBasicStorage(int SectionId)
+        public static ProductInfo[] ReadBasicStorage(int SectionId)
         {
             ProductInfo[] StorageArray = new ProductInfo[0];
             List<Storage> Buff;
@@ -55,7 +55,7 @@ namespace OKDT
             return StorageArray;
         }
 
-        public Storage[] ReadFullStorage()
+        public static Storage[] ReadFullStorage()
         {
             Storage[] StorageArray = new Storage[0];
             int lenght;
@@ -76,7 +76,7 @@ namespace OKDT
             return StorageArray;
         }
 
-        public int WriteStorage(Storage WriteStorage)
+        public static int WriteStorage(Storage WriteStorage)
         {
             using (var dbContext = new MyDbContext())
             {
@@ -94,7 +94,7 @@ namespace OKDT
         }
 
         //работа с сотрудниками
-        public Manager[] ReadManager()
+        public static Manager[] ReadManager()
         {
             Manager[] StorageArray = new Manager[0];
             int lenght;
@@ -115,7 +115,7 @@ namespace OKDT
             return StorageArray;
         }
 
-        public int WriteManager(Manager WriteManager)
+        public static int WriteManager(Manager WriteManager)
         {
             using (var dbContext = new MyDbContext())
             {
@@ -133,7 +133,7 @@ namespace OKDT
             return 0;
         }
 
-        public int ManagersProfitCheck()
+        public static int ManagersProfitCheck()
         {
             List<Manager> managers;
             ProfitArchive managersProfit;
@@ -195,7 +195,7 @@ namespace OKDT
         }
 
         //работа с агентами
-        public ConterAgent[] ReadAgent()
+        public static ConterAgent[] ReadAgent()
         {
             ConterAgent[] ReadArray = new ConterAgent[0];
             using(var dbContext = new MyDbContext())
@@ -211,7 +211,7 @@ namespace OKDT
             }
             return ReadArray;
         }
-        public int WriteAgent(ConterAgent WriteAgents)
+        public static int WriteAgent(ConterAgent WriteAgents)
         {
             using (var dbContext = new MyDbContext())
             {
@@ -229,7 +229,7 @@ namespace OKDT
         }
 
         //работа с прибылью
-        public ProfitArchive[] ReadProfitArchive()
+        public static ProfitArchive[] ReadProfitArchive()
         {
             ProfitArchive[] ReadProfit = new ProfitArchive[0];
             using (var dbContext = new MyDbContext())
@@ -246,7 +246,7 @@ namespace OKDT
             return ReadProfit;
         }
 
-        public DailyProfit[] ReadDailyProfit()
+        public static DailyProfit[] ReadDailyProfit()
         {
             DailyProfit[] ReadProfit = new DailyProfit[0];
             using(var dbContext = new MyDbContext())
@@ -263,7 +263,7 @@ namespace OKDT
             return ReadProfit;
         }
 
-        public DailySectionProfit[] ReadDailySectionProfit()
+        public static DailySectionProfit[] ReadDailySectionProfit()
         {
             DailySectionProfit[] ReadProfit = new DailySectionProfit[0];
             using (var dbContext = new MyDbContext())
@@ -280,7 +280,7 @@ namespace OKDT
             return ReadProfit;
         }
 
-        public MountlyProfit[] ReadMountlyProfit()
+        public static MountlyProfit[] ReadMountlyProfit()
         {
             MountlyProfit[] ReadProfit = new MountlyProfit[0];
             using (var dbContext = new MyDbContext())
@@ -297,7 +297,7 @@ namespace OKDT
             return ReadProfit;
         }
 
-        public List<MountlyStruct> CompositeMountlyProfit()
+        public static List<MountlyStruct> CompositeMountlyProfit()
         {
             int i, j, n, lenght;
             double midProfit;

@@ -1,20 +1,11 @@
-﻿using DataBaseLab.BuyView;
-using OKDT;
+﻿using OKDT;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace DataBaseLab.SaleView
 {
@@ -46,12 +37,11 @@ namespace DataBaseLab.SaleView
             ReadStorage();
         }
 
-        private void ReadStorage()
+        private async void ReadStorage()
         {
             int i;
-            StructWorkClass SWC = new StructWorkClass();
             ProductInfo[] ReadInfo;
-            ReadInfo = SWC.ReadBasicStorage(SectionId);
+            ReadInfo = StructWorkClass.ReadBasicStorage(SectionId);
             Storage = new PositionBlank[ReadInfo.Length];
             for (i = 0; i < ReadInfo.Length; i++)
             {
@@ -63,10 +53,34 @@ namespace DataBaseLab.SaleView
 
         private void PositionBlank_Click(object sender, MouseButtonEventArgs e)
         {
-            if(sender is PositionBlank)
+            if (sender is PositionBlank)
             {
-                SelectedBuff = sender as PositionBlank;
+                if (SelectedBuff != null)
+                    SelectedBuff.ChangeBackground(Brushes.LightGray);
+                
+                if (SelectedBuff == sender as PositionBlank)
+                {
+                    ChangeRow.Height = new GridLength(0);
+                    SelectedBuff = null;
+                }
+                else
+                {
 
+                    
+                    //SelectedBuff.ChangeBackground(Brushes.LightGray);
+                    SelectedBuff = sender as PositionBlank;
+                    ProdName.Text = SelectedBuff.GetNames();
+                    if (SelectedBuff.GetPosition() == 1)
+                    {
+                        InsertAmount.Text = Convert.ToString(SelectedBuff.GetAmount());
+                        ChangeRow.Height = new GridLength(0);
+                    }
+                    else
+                    {
+                        InsertAmount.Text = "0";
+                        ChangeRow.Height = new GridLength(50);
+                    }
+                }
 
             }
         }
@@ -74,7 +88,7 @@ namespace DataBaseLab.SaleView
         private void AddCart()
         {
             int CurId = SelectedBuff.GetId();
-            int CurAmount = 0;
+            int CurAmount = Convert.ToInt32(InsertAmount.Text);
             int a = Court.Length;
             Array.Resize(ref Court, Court.Length + 1);
 
@@ -83,7 +97,7 @@ namespace DataBaseLab.SaleView
 
             Storage[CurId].ChangeAmount(Storage[CurId].GetAmount() - CurAmount);
 
-            CourtViewer.Children.Add(Court[a]); 
+            CourtViewer.Children.Add(Court[a]);
         }
 
         private void BuyBtm_MouseDown(object sender, MouseButtonEventArgs e)
@@ -96,8 +110,7 @@ namespace DataBaseLab.SaleView
                 changeInfo[i].Id = Court[i].GetProductId();
                 changeInfo[i].Amount = Court[i].GetAmount();
             }
-            SaleClass SC = new SaleClass();
-            SC.SaleWork(changeInfo, ManagerId, SectionId);
+            SaleClass.SaleWork(changeInfo, ManagerId, SectionId);
 
             CourtViewer.Children.Clear();
             Court = new PositionBlank[0];
@@ -158,46 +171,45 @@ namespace DataBaseLab.SaleView
 
         private void ChangeBtm_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (SelectedBuff != null)
+            if (SelectedBuff != null && SelectedBuff.GetPosition() == 1)
             {
-
+                InsertAmount.Text = Convert.ToString(SelectedBuff.GetAmount());
+                ChangeRow.Height = new GridLength(50);
             }
         }
 
-        private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
+        private void AbortBtm_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(sender is PositionBlank pb)
-            {
-                pb.Background = Brushes.PaleVioletRed;
-            }
-            
+            if (SelectedBuff.GetPosition() == 0)
+                InsertAmount.Text = "0";
+            else
+                InsertAmount.Text = Convert.ToString(SelectedBuff.GetAmount());
         }
 
-
-
-
-        //Начало колхоза им. Ленина
-
-
-        private static ChangeInfo buff;
-
-        private PositionBlank ChangingCourt;
-        public int ChangeCourtAmount
+        private void AcceptBtm_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            set
+            if (SelectedBuff.GetPosition() == 0)
             {
-                int buff = value;
-                int id = ChangingCourt.GetId();
-                if (buff >= ChangingCourt.GetAmount())
-                {
-                    DeleteCourtElement();
-                    return;
-                }
-                ChangingCourt.ChangeAmount(ChangingCourt.GetAmount() - buff);
-                buff += Storage[id].GetAmount();
-                Storage[id].ChangeAmount(buff);
+                if (Convert.ToInt32(InsertAmount.Text) <= SelectedBuff.GetAmount())
+                    AddCart();
+                return;
+            }
+            if (Storage[SelectedBuff.GetId()].GetAmount() + SelectedBuff.GetAmount() >= Convert.ToInt32(InsertAmount.Text))
+            {
+                Storage[SelectedBuff.GetId()].ChangeAmount(Storage[SelectedBuff.GetId()].GetAmount() + SelectedBuff.GetAmount() - Convert.ToInt32(InsertAmount.Text));
+                SelectedBuff.ChangeAmount(Convert.ToInt32(InsertAmount.Text));
+            }
+            if (SelectedBuff.GetAmount() < 1)
+            {
+                DeleteCourtElement();
+                ChangeRow.Height = new GridLength(0);
             }
         }
-        //Конец колхоза им. Ленина
+
+        private void InsertAmount_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }

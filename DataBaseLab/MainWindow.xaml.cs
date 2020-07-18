@@ -22,13 +22,11 @@ namespace DataBaseLab
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int managerId = -1;
-        public int sectionId = -1;
+        public int managerId = 0;
+        public int sectionId = 1;
         public MainWindow()
         {
-            StartWindow SW = new StartWindow(this);
             InitializeComponent();
-            SW.Show();
         }
         //События левой панели
 

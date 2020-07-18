@@ -7,9 +7,9 @@ using System.Data.Entity;
 
 namespace OKDT
 {
-    class BuyClass
+    static class BuyClass
     {
-        public Buy[] ReadBuys()
+        public static Buy[] ReadBuys()
         {
             Buy[] ReadProfit = new Buy[0];
             using (var dbContext = new MyDbContext())
@@ -26,7 +26,7 @@ namespace OKDT
             return ReadProfit;
         }
 
-        public int BuyWork(ChangeInfo[] BuyArray)
+        public static int BuyWork(ChangeInfo[] BuyArray)
         {
             Buy WriteInfo;
             Storage storageBuff = new Storage();

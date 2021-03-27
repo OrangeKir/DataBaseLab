@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="DataBaseLab.SaleView.PositionBlank"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DataBaseLab.BuyView"
+             mc:Ignorable="d" 
+             Background="LightGray"
+             d:DesignHeight="50" d:DesignWidth="250" MouseDown="UserControl_MouseDown">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="55"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Fill="LightSlateGray"/>
+        <TextBlock x:Name="AmountBlank" Grid.Column="1" Margin="5,10,5,10" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Amount"/>
+        <TextBlock x:Name="NameBlank" Grid.Column="0" Margin="5,10,5,10" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Name"/>
+    </Grid>
+</UserControl>
